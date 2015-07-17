@@ -201,11 +201,11 @@ abstract class Terminus_Command {
       $tries++;
     }
     print PHP_EOL;
-    if(("succeeded" === $workflow['data']->result) OR ("aborted" === $workflow['data']->result))
+    if(in_array($workflow['data']->result, array("succeeded", "aborted", ""))) {
       return $workflow['data'];
+    }
     
     return false;
-    unset($workflow);
   }
 
   protected function handleDisplay($data,$args = array(), $headers = null) {

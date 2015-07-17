@@ -26,14 +26,15 @@ Feature: sites
     [[test_site_name]]
     """
 
-  #Scenario: Create Site From Import
-    ##@vcr sites-create-from-import
-    #Given I am authenticating
-    #When I run "terminus sites import --site=[[test_site_name]] --url=https://pantheon-infrastructure.s3.amazonaws.com/testing/drush_archive_josh_and_rina.tar.gz"
-    #Then I should get:
-    #"""
-    #Name
-    #"""
+  Scenario: Create Site From Import
+    @vcr sites-create-from-import
+    Given I am authenticating
+    When I run "terminus sites create-from-import --site=[[test_site_name]] --label=[[test_site_name]] --url=https://pantheon-infrastructure.s3.amazonaws.com/testing/canary2.tgz"
+    And I run "terminus sites list"
+    Then I should get:
+    """
+    [[test_site_name]]
+    """
 
   #Scenario: List Aliases
     #@vcr sites-aliases
